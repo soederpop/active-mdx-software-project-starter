@@ -1,17 +1,43 @@
 import { Model } from "active-mdx"
-import Epic from "./Epic.js"
+import Epic from "./Epic.mjs"
 
 export default class Story extends Model {
   get defaults() {
     return {
       meta: {
-        status: "created"
+        status: "created",
+        estimates: {
+          low: 0,
+          high: 0
+        }
       }
     }
   }
 
+  toJSON({ related = [], attributes = [], ...options } = {}) {
+    return super.toJSON({
+      related,
+      attributes: [
+        "description",
+        "isComplete",
+        "slug",
+        "acceptanceCriteria",
+        "mockupLinks",
+        ...attributes
+      ],
+      ...options
+    })
+  }
+
   get isComplete() {
     return this.meta.status === "complete"
+  }
+
+  get description() {
+    const { document } = this
+    const { leadingElementsAfterTitle = [] } = document.nodes
+
+    return leadingElementsAfterTitle.map(document.utils.toString).join("")
   }
 
   epic() {
