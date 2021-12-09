@@ -7,14 +7,17 @@ export default function EpicsPage(props = {}) {
 }
 
 export async function getStaticProps() {
-  await content.load()
   const Epic = content.model("Epic")
 
-  const epics = await Epic.query().fetchAll()
+  await content.load()
+
+  const epics = content.available
+    .filter((i) => i.startsWith("epics"))
+    .map((id) => content.document(id).toModel())
 
   return {
     props: {
-      epics
+      epics: epics.map((epic) => epic.toJSON({ related: ["stories"] }))
     }
   }
 }

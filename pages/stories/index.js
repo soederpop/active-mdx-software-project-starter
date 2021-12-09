@@ -1,28 +1,25 @@
 import React from "react"
 import content from "docs"
 
-export default function StorysPage(props = {}) {
+export default function StoriesPage(props = {}) {
   const { stories = [] } = props
   return <div>Stories: {stories.length} </div>
 }
 
 export async function getStaticProps() {
   await content.load()
-  const Story = content.model("Story")
 
-  const stories = await Story.query()
-    .fetchAll()
-    .then((stories) =>
-      stories.map((story) =>
-        story.toJSON({
-          attributes: ["acceptanceCriteria", "mockupLinks"]
-        })
-      )
-    )
+  const stories = content.available
+    .filter((i) => i.startsWith("stories"))
+    .map((id) => content.document(id).toModel())
 
   return {
     props: {
-      stories
+      stories: stories.map((epic) =>
+        epic.toJSON({
+          attributes: ["acceptanceCriteria", "mockupLinks"]
+        })
+      )
     }
   }
 }
