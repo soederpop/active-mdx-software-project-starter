@@ -42,9 +42,11 @@ export default function CatchAllPage({
 export async function getStaticPaths() {
   await content.load()
 
-  const paths = content.available.map((catchAll) => ({
-    params: { catchAll: catchAll.split("/") }
-  }))
+  const paths = content.available
+    .filter((id) => !id.match(/^(stories|epics)/))
+    .map((catchAll) => ({
+      params: { catchAll: catchAll.split("/") }
+    }))
 
   return {
     paths,

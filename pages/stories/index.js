@@ -1,6 +1,7 @@
 import React from "react"
-import content from "docs"
+import Link from "next/link"
 import { Container, Segment, Header, Table } from "semantic-ui-react"
+import content from "docs"
 
 export default function StoriesPage(props = {}) {
   const { stories = [], epics = [] } = props
@@ -9,7 +10,10 @@ export default function StoriesPage(props = {}) {
       <Header as="h1" content="Stories" subheader="Grouped by Epic" />
       {epics.map((epic, index) => (
         <Segment key={index} raised>
-          <Header as="h2" content={epic.title} />
+          <Header
+            as="h2"
+            content={<Link href={`/epics/${epic.slug}`}>{epic.title}</Link>}
+          />
           <Table striped celled>
             <Table.Header>
               <Table.Row>
@@ -24,7 +28,11 @@ export default function StoriesPage(props = {}) {
                 .filter((story) => story.meta.epic == epic.slug)
                 .map((story, index) => (
                   <Table.Row key={index}>
-                    <Table.Cell>{story.title}</Table.Cell>
+                    <Table.Cell>
+                      <Link href={`/stories/${story.meta.epic}/${story.slug}`}>
+                        {story.title}
+                      </Link>
+                    </Table.Cell>
                     <Table.Cell>{story.description}</Table.Cell>
                     <Table.Cell>
                       {story.meta.estimates?.low || "??"}-

@@ -1,6 +1,7 @@
 import React from "react"
 import content from "docs"
 import { Icon, Container, Header, Card } from "semantic-ui-react"
+import Link from "next/link"
 
 export default function EpicsPage(props = {}) {
   const { epics = [] } = props
@@ -13,7 +14,9 @@ export default function EpicsPage(props = {}) {
       <Card.Group itemsPerRow={3}>
         {epics.map((epic, index) => (
           <Card key={index}>
-            <Card.Content header={epic.title} />
+            <Card.Content header>
+              <Link href={`/epics/${epic.slug}`}>{epic.title}</Link>
+            </Card.Content>
             <Card.Content description={epic.description} />
             <Card.Content extra>
               <Icon name="book" /> {epic.stories.length} stories

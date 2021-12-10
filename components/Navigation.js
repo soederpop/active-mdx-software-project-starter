@@ -33,7 +33,7 @@ export default function Navigation(props = {}) {
       return (
         <Menu.Item header onClick={() => toggleSidebar(false)}>
           <Link href="/" passHref>
-            <h3>ActiveMDX Docs</h3>
+            <h3>Software Project</h3>
           </Link>
         </Menu.Item>
       )
