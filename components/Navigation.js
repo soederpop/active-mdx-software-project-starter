@@ -29,9 +29,16 @@ export default function Navigation(props = {}) {
         />
       )
     },
+    h2: (props = {}) => {
+      return (
+        <Menu.Item>
+          <h3>{props.children}</h3>
+        </Menu.Item>
+      )
+    },
     h1: () => {
       return (
-        <Menu.Item header onClick={() => toggleSidebar(false)}>
+        <Menu.Item onClick={() => toggleSidebar(false)}>
           <Link href="/" passHref>
             <h3>Software Project</h3>
           </Link>
