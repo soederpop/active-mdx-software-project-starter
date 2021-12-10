@@ -4,6 +4,8 @@ This project is a Next.js site for presenting documentation about a software pro
 
 It uses [ActiveMDX](https://active-mdx.soederpop.com) to treat individual documents as data.
 
+[View the website](https://active-mdx-software-demo.soederpop.com/)
+
 ## Getting Started
 
 1) Clone this repo
