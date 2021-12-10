@@ -12,10 +12,33 @@ export default class Epic extends Model {
     }
   }
 
+  get totalEstimates() {
+    return this.stories()
+      .fetchAll()
+      .reduce(
+        (memo, story) => {
+          const { high = 0, low = 0 } = story.meta?.estimates || {}
+
+          return {
+            high: memo.high + high,
+            low: memo.low + low
+          }
+        },
+        { high: 0, low: 0 }
+      )
+  }
+
   get isComplete() {
     return this.stories()
       .fetchAll()
       .every((story) => story.isComplete)
+  }
+
+  get percentComplete() {
+    const stories = this.stories().fetchAll()
+    return Math.ceil(
+      (stories.filter((s) => s.isComplete).length / stories.length) * 100
+    )
   }
 
   get description() {
@@ -28,7 +51,13 @@ export default class Epic extends Model {
   toJSON({ related = [], attributes = [], ...options } = {}) {
     return super.toJSON({
       related: ["stories", ...related],
-      attributes: ["description", "isComplete", "slug", ...attributes],
+      attributes: [
+        "description",
+        "isComplete",
+        "slug",
+        "totalEstimates",
+        ...attributes
+      ],
       ...options
     })
   }

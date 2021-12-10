@@ -1,8 +1,16 @@
 import Head from "next/head"
 import content from "docs"
+import ScopeOfWork from "components/ScopeOfWork"
 
-export default function ScopeOfWork(props = {}) {
-  return <div>Scope of work TODO</div>
+export default function ScopeOfWorkPage(props = {}) {
+  return (
+    <>
+      <Head>
+        <title>Scope of Work</title>
+      </Head>
+      <ScopeOfWork epics={props.epics} />
+    </>
+  )
 }
 
 export async function getStaticProps({ params }) {
