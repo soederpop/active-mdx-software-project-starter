@@ -1,7 +1,6 @@
 import React from "react"
 import Link from "next/link"
 import { Container, Segment, Header, Table } from "semantic-ui-react"
-import content from "docs"
 
 export default function StoriesPage(props = {}) {
   const { stories = [], epics = [] } = props
@@ -50,7 +49,7 @@ export default function StoriesPage(props = {}) {
 }
 
 export async function getStaticProps() {
-  await content.load()
+  const content = await import("../../docs").then((mod) => mod.default.load())
 
   const stories = content.available
     .filter((i) => i.startsWith("stories"))

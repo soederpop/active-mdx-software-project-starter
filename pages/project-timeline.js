@@ -16,9 +16,7 @@ export default function ProjectTimelinePage({ epics = [] } = {}) {
         Below is the projected completion and start points for each of the
         epics.
       </p>
-      <Segment raised>
-        <ProjectTimeline epics={epics} />
-      </Segment>
+      <ProjectTimeline epics={epics} />
     </>
   )
 }

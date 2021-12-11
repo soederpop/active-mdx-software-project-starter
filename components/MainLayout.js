@@ -65,7 +65,7 @@ export default function MainLayout(props = {}) {
             </Menu>
           </Column>
           <Column width={14}>
-            <Container>{content}</Container>
+            <Container fluid>{content}</Container>
           </Column>
         </Row>
       </Grid>
