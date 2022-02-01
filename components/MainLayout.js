@@ -23,10 +23,15 @@ export default function MainLayout(props = {}) {
   return (
     <LayoutProvider sidebarVisible={visible} toggleSidebar={toggleSidebar}>
       <Grid fluid style={{ height: "100%", minHeight: "100vh" }}>
-        <Row only="mobile">
+        <Row only="mobile tablet">
           <Column width={16}>
             <Sidebar.Pushable
-              style={{ borderRadius: "0px", margin: 0, padding: 0 }}
+              style={{
+                borderRadius: "0px",
+                margin: 0,
+                padding: 0,
+                marginRight: "24px"
+              }}
             >
               <Sidebar
                 as={Menu}
@@ -45,13 +50,13 @@ export default function MainLayout(props = {}) {
               </Sidebar>
               <Sidebar.Pusher dimmed={visible}>
                 <Icon name="bars" onClick={() => setVisible(true)} />
-                <Container>{content}</Container>
+                <Container style={{ paddingTop: "24px" }}>{content}</Container>
               </Sidebar.Pusher>
             </Sidebar.Pushable>
           </Column>
         </Row>
-        <Row only="tablet computer">
-          <Column width={2}>
+        <Row only="computer">
+          <Column width={3}>
             <Menu
               vertical
               inverted
@@ -64,8 +69,15 @@ export default function MainLayout(props = {}) {
               {navigation}
             </Menu>
           </Column>
-          <Column width={14}>
-            <Container fluid>{content}</Container>
+          <Column
+            width={13}
+            style={{
+              paddingLeft: "12px",
+              paddingRight: "24px",
+              paddingTop: "24px"
+            }}
+          >
+            {content}
           </Column>
         </Row>
       </Grid>

@@ -1,4 +1,4 @@
-import { removeFrontMatter } from "active-mdx/src/plugins/mdx.js"
+import { removeFrontMatter } from "@active-mdx/core/src/plugins/mdx.js"
 import nextMdx from "@next/mdx"
 import gfm from "remark-gfm"
 import { visit } from "unist-util-visit"
@@ -26,7 +26,7 @@ export default withMDX({
     // Fixes npm packages (mdx) that depend on `fs` module
     if (!isServer) {
       config.resolve.fallback.fs = false
-      config.externals.push("active-mdx", "active-mdx/src/Collection.js")
+      config.externals.push("@active-mdx/core", "octokit")
     }
 
     return config
